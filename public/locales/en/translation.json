@@ -1,0 +1,16 @@
+{
+  "title": "Welcome",
+  "select-country": "Select the Country",
+  "weather-right-now-in": "The Weather Right now in",
+  "temperature": "temperature",
+  "wind": "wind",
+  "pressure": "pressure",
+  "humidity": "humidity",
+  "m/s": "m/s",
+  "mb": "mb",
+  "min": "Min",
+  "max": "Max",
+  "direction": "Direction",
+  "footer": "This web app was created by",
+  "loading": "Loading..."
+}
