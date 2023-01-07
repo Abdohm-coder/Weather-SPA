@@ -1,14 +1,15 @@
 import axios from "axios";
-import { init } from "ityped";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Loading from "../ui/loading";
 import SelectUI from "../ui/select";
 import WeatherContainer from "./weather-container";
 
 function Main() {
-  const { t } = useTranslation();
-  const ref = useRef(null);
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const [countries, setCountries] = useState<any[] | undefined>();
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [weather, setWeather] = useState();
@@ -28,6 +29,7 @@ function Main() {
 
   useEffect(() => {
     if (selectedCountry) {
+      console.log(selectedCountry);
       const fetchWeather = async () => {
         const { latlng } = selectedCountry;
         try {
@@ -54,14 +56,9 @@ function Main() {
         }
       };
       fetchWeather();
-      init(ref?.current!, {
-        showCursor: false,
-        backDelay: 1500,
-        backSpeed: 60,
-        strings: [selectedCountry.name.common, selectedCountry.name.official],
-      });
     }
   }, [selectedCountry]);
+
   return (
     <section className="w-11/12 mx-auto sm:w-screen min-h-[calc(100vh-14rem)] mt-8 pb-12">
       <div className="max-w-lg w-full mx-auto my-8">
@@ -74,19 +71,26 @@ function Main() {
           isLoading={countries ? false : true}
           onChange={setSelectedCountry}
           defaultValue={selectedCountry}
-          getOptionLabel={(option: any) => option?.name?.common}
-          getOptionValue={(option: any) => option?.name?.common}
+          getOptionLabel={(option: any) =>
+            language === "ar"
+              ? option?.translations?.ara?.common
+              : option?.name?.common
+          }
+          getOptionValue={(option: any) =>
+            language === "ar"
+              ? option?.translations?.ara?.common
+              : option?.name?.common
+          }
         />
       </div>
       <div className="mt-8 flex space-y-3 flex-col items-center">
         {selectedCountry && (
           <h1 className="text-2xl text-center text-gray-500 font-medium tracking-wide">
             {t("weather-right-now-in")}{" "}
-            <strong ref={ref} className="text-black">
-              {/* 
-                The text is comming from the animation library
-                ==============================================
-              */}
+            <strong className="text-black">
+              {language === "ar"
+                ? selectedCountry?.translations?.ara?.common
+                : selectedCountry?.name?.common}
             </strong>
           </h1>
         )}
