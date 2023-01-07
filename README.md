@@ -2,6 +2,10 @@
 
 This Weather Single Page Application is created by Abdo Hadj Med using React.JS and Rest API, to display the weather in a certain country. 
 
+# How To Measure The Performance of Web App
+
+Check this website: https://pagespeed.web.dev/report?url=https%3A%2F%2Fweather-spa.vercel.app%2F
+
 # How To Run The Project
 
 Open the terminal, then:
