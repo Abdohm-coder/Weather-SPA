@@ -29,7 +29,6 @@ function Main() {
 
   useEffect(() => {
     if (selectedCountry) {
-      console.log(selectedCountry);
       const fetchWeather = async () => {
         const { latlng } = selectedCountry;
         try {
